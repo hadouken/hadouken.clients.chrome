@@ -2,11 +2,11 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.type === 'test-connection') {
-            $.jsonRPC.request('core.plugins.list', {
+            $.jsonRPC.request('core.getVersion', {
                 endPoint: request.data.endpoint,
                 username: request.data.username,
                 password: request.data.password,
-                success: function() { sendResponse({ success: true }); },
+                success: function(v) { sendResponse({ success: true, version: v.result }); },
                 error: function() { sendResponse({ success: false }); }
             });
 

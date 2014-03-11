@@ -40,7 +40,7 @@ function test(data) {
 
     chrome.runtime.sendMessage(message, function(response) {
         if(response.success) {
-            setStatus('Connection OK!');
+            setStatus('Connection OK! Hadouken v' + response.version);
         } else {
             setStatus('Failed to connect :(');
         }
