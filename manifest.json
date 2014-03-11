@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "hadouken",
+  "version": "1.0",
+  "description": "Hadouken tools and support services.",
+
+  "background": {
+    "scripts": ["js/lib/jquery-1.11.0.min.js", "js/lib/jquery.jsonrpc.js", "js/background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://www.torrentleech.org/*"],
+      "js": ["js/lib/jquery-1.11.0.min.js", "js/torrentleech.js"]
+    }
+  ],
+
+  "options_page": "options.html",
+  
+  "permissions": ["<all_urls>"]
+}
