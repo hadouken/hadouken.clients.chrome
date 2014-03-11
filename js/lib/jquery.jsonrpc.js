@@ -1,4 +1,10 @@
 (function ($, undefined) {
+    function basic_auth_header(user, password) {
+      var tok = user + ':' + password;
+      var hash = btoa(tok);
+      return "Basic " + hash;
+    }
+
     $.extend({
         jsonRPC: {
             // RPC Version Number
@@ -187,8 +193,13 @@
                     data: data,
                     cache: options.cache,
                     processData: false,
-                    username: options.username,
-                    password: options.password,
+                    beforeSend: function (xhr) { 
+                        if(typeof options.username === 'undefined' || typeof options.password === 'undefined') {
+                            return;
+                        }
+
+                        xhr.setRequestHeader('Authorization', basic_auth_header(options.username, options.password)); 
+                    },
                     error: function (json) {
                         that._requestError.call(that, json, options.error);
                     },
