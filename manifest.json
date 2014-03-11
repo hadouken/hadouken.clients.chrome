@@ -11,8 +11,8 @@
 
   "content_scripts": [
     {
-      "matches": ["http://www.torrentleech.org/*"],
-      "js": ["js/lib/jquery-1.11.0.min.js", "js/torrentleech.js"]
+      "matches": ["http://thepiratebay.se/*"],
+      "js": ["js/lib/jquery-1.11.0.min.js", "js/sites/thepiratebay.js"]
     }
   ],
 

@@ -16,6 +16,26 @@ chrome.runtime.onMessage.addListener(
             sendResponse({ success: true });
         } else if (request.type === 'load-options') {
             sendResponse({data: JSON.parse(localStorage['options'])});
+        } else if (request.type === 'add-url') {
+            addUrl(request.data, sendResponse);
+            return true;
         }
     }
 );
+
+function addUrl(url, callback) {
+    var options = getOptions();
+
+    $.jsonRPC.request('torrents.addUrl', {
+        params: [ url, '', '' ],
+        endPoint: options.endpoint,
+        username: options.username,
+        password: options.password,
+        success: function() { callback({ success: true }); },
+        error: function() { callback({ success: false }); }
+    });
+}
+
+function getOptions() {
+    return JSON.parse(localStorage['options']);
+}
