@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    { src: ['**/*.*'], dest: 'build/hdkn.chrome-<%= version %>/', cwd: 'src/', expand: true }
+                    { src: ['**/*.*'], dest: 'build/<%= pkg.name %>-<%= version %>/', cwd: 'src/', expand: true }
                 ]
             }
         },
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         setversion: {
             main: {
                 options: {
-                    manifest_file: 'build/hdkn.chrome-<%= version %>/manifest.json',
+                    manifest_file: 'build/<%= pkg.name %>-<%= version %>/manifest.json',
                     version: '<%= version %>'
                 }
             }
@@ -28,11 +28,22 @@ module.exports = function(grunt) {
         compress: {
             main: {
                 options: {
-                    archive: 'build/hdkn.chrome-<%= version %>.zip'
+                    archive: 'build/<%= pkg.name %>-<%= version %>.zip'
                 },
                 files: [
-                    { src: ['**/*.*'], dest: '/', cwd: 'build/hdkn.chrome-<%= version %>/', expand: true }
+                    { src: ['**/*.*'], dest: '/', cwd: 'build/<%= pkg.name %>-<%= version %>/', expand: true }
                 ]
+            }
+        },
+
+        webstorepublish: {
+            main: {
+                options: {
+                    package: 'build/<%= pkg.name %>-<%= version %>.zip',
+                    client_id: process.env.CLIENT_ID,
+                    client_secret: process.env.CLIENT_SECRET,
+                    code: process.env.CODE
+                }
             }
         }
     });
@@ -46,4 +57,7 @@ module.exports = function(grunt) {
 
     // Default task
     grunt.registerTask('default', ['clean', 'copy', 'setversion', 'compress']);
+
+    // Publish task
+    grunt.registerTask('publish', ['default', 'webstorepublish']);
 };
