@@ -30,15 +30,19 @@ module.exports = function(grunt) {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + access_token,
-                'x-goog-api-version': '2'
+                'x-goog-api-version': '2',
+                'Content-Length': '0'
             },
+            url: endpoint,
+            body: ''
         };
 
-        request.post(endpoint, opts, function(error, response, body) {
+        request(opts, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 callback();
             } else {
-                grunt.warn(error);
+                grunt.log.writeln(body);
+                grunt.warn('Could not publish package');
             }
         });
     }
@@ -49,7 +53,7 @@ module.exports = function(grunt) {
         var options = this.options({
             token_url: 'https://accounts.google.com/o/oauth2/token',
             upload_url: 'https://www.googleapis.com/upload/chromewebstore/v1.1/items/$APP_ID$',
-            publish_url: 'https://www.googleapis.com/upload/chromewebstore/v1.1/items/$APP_ID$/publish'
+            publish_url: 'https://www.googleapis.com/chromewebstore/v1.1/items/$APP_ID$/publish'
         });
 
         if(!options.package) {
