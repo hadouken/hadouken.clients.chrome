@@ -47,20 +47,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
-    // Default task should be clean, copy, setversion, compress
+    // Load custom tasks
+    grunt.loadTasks('tasks/');
+
+    // Default task
     grunt.registerTask('default', ['clean', 'copy', 'setversion', 'compress']);
-
-    // setversion task
-    grunt.registerMultiTask('setversion', 'Sets the version in the manifest.json file', function() {
-        var options = this.options({
-            manifest_file: 'manifest.json',
-            version: '0.0.0'
-        });
-
-        var manifest = grunt.file.readJSON(options.manifest_file);
-        manifest.version = options.version;
-
-        // Write new manifest file
-        grunt.file.write(options.manifest_file, JSON.stringify(manifest, undefined, 2));
-    });
 };
