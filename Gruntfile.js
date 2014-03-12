@@ -1,12 +1,6 @@
 module.exports = function(grunt) {
-    var version = '0.0.0';
-
-    if(typeof process.env.VERSION !== 'undefined') {
-        version = process.env.VERSION;
-    }
-
     grunt.initConfig({
-        version: version,
+        version: process.env.VERSION || '0.0.0',
 
         pkg: grunt.file.readJSON('package.json'),
 
