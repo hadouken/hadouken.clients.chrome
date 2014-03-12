@@ -2,6 +2,7 @@
   "name": "hadouken.extensions.chrome",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "^0.4.3"
+    "grunt": "^0.4.3",
+    "grunt-contrib-compress": "^0.7.0"
   }
 }
