@@ -3,6 +3,11 @@ $(document).ready(function() {
         e.preventDefault();
         sendUrl($(this).attr('href'));
     });
+
+    $('a[title="Torrent File"]').on('click', function(e) {
+        e.preventDefault();
+        sendUrl($(this).attr('href'));
+    });
 });
 
 function sendUrl(url) {
