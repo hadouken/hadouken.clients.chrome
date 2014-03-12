@@ -31,7 +31,16 @@ function addUrl(url, callback) {
         endPoint: options.endpoint,
         username: options.username,
         password: options.password,
-        success: function() { callback({ success: true }); },
+        success: function(response) {
+            var opt = {
+                type: 'basic',
+                title: 'Torrent added',
+                message: 'Successfully added torrent ' + response.result.Name,
+                iconUrl: '/images/icon128.png'
+            };
+
+            chrome.notifications.create(response.result.Id, opt, function() { callback({ success: true }); });
+        },
         error: function() { callback({ success: false }); }
     });
 }
