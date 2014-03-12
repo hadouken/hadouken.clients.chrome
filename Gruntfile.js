@@ -42,7 +42,7 @@ module.exports = function(grunt) {
                     package: 'build/<%= pkg.name %>-<%= version %>.zip',
                     client_id: process.env.CLIENT_ID,
                     client_secret: process.env.CLIENT_SECRET,
-                    code: process.env.CODE
+                    refresh_token: process.env.REFRESH_TOKEN
                 }
             }
         }
