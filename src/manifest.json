@@ -5,8 +5,6 @@
   "short_name": "hdkn",
   "version": "0.0",
   "description": "Hadouken tools and support services.",
-  "default_locale": "en",
-
 
   "background": {
     "scripts": ["js/lib/jquery-1.11.0.min.js", "js/lib/jquery.jsonrpc.js", "js/background.js"]
