@@ -4,6 +4,11 @@ $(document).ready(function() {
     $('a[href$=".torrent"]').each(function(item) {
         var el = $('<a href="#"><img src="' + iconUrl + '" /></a>');
         $(this).after(el);
+        var url = $(this).attr('href');
+
+        el.on('click', function(e) {
+        	sendUrl(url);
+        });
     });
 });
 
