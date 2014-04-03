@@ -25,5 +25,9 @@
 
   "options_page": "options.html",
   
-  "permissions": ["<all_urls>", "notifications"]
+  "permissions": ["<all_urls>", "notifications"],
+
+  "web_accessible_resources": [
+    "images/icon16.png"
+  ]
 }

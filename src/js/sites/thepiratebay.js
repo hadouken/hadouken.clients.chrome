@@ -1,7 +1,9 @@
 $(document).ready(function() {
-    $('a[href$=".torrent"]').on('click', function(e) {
-        e.preventDefault();
-        sendUrl($(this).attr('href'));
+    var iconUrl = chrome.extension.getURL('/images/icon16.png');
+
+    $('a[href$=".torrent"]').each(function(item) {
+        var el = $('<a href="#"><img src="' + iconUrl + '" /></a>');
+        $(this).after(el);
     });
 });
 
