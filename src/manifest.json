@@ -22,6 +22,14 @@
     {
       "matches": ["https://thepiratebay.se/*", "http://thepiratebay.se/*"],
       "js": ["js/lib/jquery-1.11.0.min.js", "js/sites/thepiratebay.js"]
+    },
+    {
+      "matches": ["http://kickass.to/*"],
+      "js": ["js/lib/jquery-1.11.0.min.js", "js/sites/kickasstorrents.js"]
+    },
+    {
+      "matches": ["http://isohunt.to/torrent_details/*"],
+      "js": ["js/lib/jquery-1.11.0.min.js", "js/sites/isohunt.js"]
     }
   ],
 
@@ -40,6 +48,9 @@
   ],
 
   "web_accessible_resources": [
-    "images/icon12.png"
+    "images/icon12.png",
+    "images/icon20_white_nograd.png",
+    "images/icon24_golden_nograd.png",
+    "images/icon48.png"
   ]
 }
