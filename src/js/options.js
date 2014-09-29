@@ -3,7 +3,8 @@ $(document).ready(function() {
         e.preventDefault();
         
         var data = {
-            endpoint: $('#endpoint').val(),
+            host: $('#host').val(),
+            port: parseInt($('#port').val(), 10),
             username: $('#username').val(),
             password: $('#password').val()
         };
@@ -13,26 +14,34 @@ $(document).ready(function() {
 
     $('#btn-test').on('click', function(e) {
         e.preventDefault();
+        var btn = $(this);
+        
+        setStatus('Connecting...');
+        btn.attr('disabled', true);
 
         var data = {
-            endpoint: $('#endpoint').val(),
+            host: $('#host').val(),
+            port: parseInt($('#port').val(), 10),
             username: $('#username').val(),
             password: $('#password').val()
         };
 
-        test(data);
+        test(data, function() {
+            btn.attr('disabled', false);
+        });
     });
 
     chrome.runtime.sendMessage({type: 'load-options'}, function(response) {
         console.log(response);
         
-        $('#endpoint').val(response.data.endpoint);
+        $('#host').val(response.data.host);
+        $('#port').val(response.data.port);
         $('#username').val(response.data.username);
         $('#password').val(response.data.password);
     });
 });
 
-function test(data) {
+function test(data, callback) {
     var message =  {
         type: 'test-connection',
         data: data
@@ -40,10 +49,12 @@ function test(data) {
 
     chrome.runtime.sendMessage(message, function(response) {
         if(response.success) {
-            setStatus('Connection OK! Hadouken v' + response.version);
+            setStatus('Connection OK!');
         } else {
             setStatus('Failed to connect :(');
         }
+
+        callback();
     });
 }
 

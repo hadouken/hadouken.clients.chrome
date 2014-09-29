@@ -2,12 +2,8 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.type === 'test-connection') {
-            $.jsonRPC.request('core.getVersion', {
-                endPoint: request.data.endpoint,
-                username: request.data.username,
-                password: request.data.password,
-                success: function(v) { sendResponse({ success: true, version: v.result }); },
-                error: function() { sendResponse({ success: false }); }
+            getToken(request.data, function(token) {
+                sendResponse({ success: true, version: token });
             });
 
             return true;
@@ -22,6 +18,19 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
+
+function getToken(options, callback) {
+    $.ajax({
+        type: 'POST',
+        url: 'http://' + options.host + ':' + options.port + '/auth/login',
+        data: JSON.stringify({ UserName: options.username, Password: options.password }),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: function(data) {
+            callback(data.token);
+        }
+    });
+}
 
 function addUrl(url, callback) {
     var options = getOptions();

@@ -1,62 +1,83 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Hadouken extension options</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
-    </head>
+  <head>
+    <title>Options - Hadouken for Google Chrome</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+  </head>
 
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Settings for the Hadouken Chrome extension</div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" method="POST">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="endpoint">Endpoint</label>
-                                    <div class="col-md-4">
-                                        <input type="text" name="endpoint" id="endpoint" class="form-control" placeholder="http://<host>:<port>/manage/jsonrpc" />
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p class="form-control-static">The full URL to the JSONRPC service of your Hadouken instance.</p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="username">Username</label>
-                                    <div class="col-md-4">
-                                        <input type="text" name="username" id="username" class="form-control" />
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p class="form-control-static"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="password">Password</label>
-                                    <div class="col-md-4">
-                                        <input type="password" name="password" id="password" class="form-control" />
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p class="form-control-static"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button type="submit" class="btn btn-primary" id="btn-save">Save</button>
-                                        <button type="button" class="btn btn-default btn-sm" id="btn-test">Test connection</button>
-                                        <span id="statustext"></span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">Hadouken for Google Chrome</div>
+            <div class="panel-body">
+              <form class="form-horizontal" method="POST">
+
+                <!-- Host -->
+                <div class="form-group">
+                  <label class="control-label col-md-3" for="host">Host</label>
+                  <div class="col-md-4">
+                    <input type="text" id="host" class="form-control" placeholder="localhost" />
+                  </div>
+                  <div class="col-md-5">
+                    <p class="form-control-static">The hostname/IP to your Hadouken instance.</p>
+                  </div>
                 </div>
-            </div>
-        </div>
 
-        <script type="text/javascript" src="/js/lib/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="/js/options.js"></script>
-    </body>
+                <!-- Port -->
+                <div class="form-group">
+                  <label class="control-label col-md-3" for="port">Port</label>
+                  <div class="col-md-2">
+                    <input type="number" id="port" class="form-control" placeholder="7890" />
+                  </div>
+                  <div class="col-md-5">
+                    <p class="form-control-static"></p>
+                  </div>
+                </div>
+
+                <hr/>
+
+                <!-- Username -->
+                <div class="form-group">
+                  <label class="control-label col-md-3" for="username">Username</label>
+                  <div class="col-md-4">
+                    <input type="text" name="username" id="username" class="form-control" />
+                  </div>
+                  <div class="col-md-5">
+                    <p class="form-control-static"></p>
+                  </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                  <label class="control-label col-md-3" for="password">Password</label>
+                  <div class="col-md-4">
+                    <input type="password" name="password" id="password" class="form-control" />
+                  </div>
+                  <div class="col-md-5">
+                    <p class="form-control-static"></p>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-group">
+                  <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-primary" id="btn-save">Save</button>
+                    <button type="button" class="btn btn-default btn-sm" id="btn-test">Test connection</button>
+                    <span id="statustext"></span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/js/lib/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/js/options.js"></script>
+  </body>
 </html>
