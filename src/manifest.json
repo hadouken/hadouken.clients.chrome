@@ -2,12 +2,20 @@
   "manifest_version": 2,
 
   "name": "Hadouken",
-  "short_name": "hdkn",
   "version": "0.0",
-  "description": "Hadouken tools and support services.",
+  "description": "Hadouken for Google Chrome.",
 
   "background": {
     "scripts": ["js/lib/jquery-1.11.0.min.js", "js/lib/jquery.jsonrpc.js", "js/background.js"]
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon16.png",
+      "38": "images/icon48.png"
+    },
+    "default_title": "Hadouken",
+    "default_popup": "popup.html"
   },
 
   "content_scripts": [
@@ -25,7 +33,11 @@
 
   "options_page": "options.html",
   
-  "permissions": ["<all_urls>", "notifications"],
+  "permissions": [
+    "<all_urls>",
+    "notifications",
+    "storage"
+  ],
 
   "web_accessible_resources": [
     "images/icon16.png"

@@ -5,8 +5,7 @@ $(document).ready(function() {
         var data = {
             host: $('#host').val(),
             port: parseInt($('#port').val(), 10),
-            username: $('#username').val(),
-            password: $('#password').val()
+            token: $('#token').val()
         };
 
         save(data);
@@ -22,8 +21,7 @@ $(document).ready(function() {
         var data = {
             host: $('#host').val(),
             port: parseInt($('#port').val(), 10),
-            username: $('#username').val(),
-            password: $('#password').val()
+            token: $('#token').val()
         };
 
         test(data, function() {
@@ -32,12 +30,9 @@ $(document).ready(function() {
     });
 
     chrome.runtime.sendMessage({type: 'load-options'}, function(response) {
-        console.log(response);
-        
         $('#host').val(response.data.host);
         $('#port').val(response.data.port);
-        $('#username').val(response.data.username);
-        $('#password').val(response.data.password);
+        $('#token').val(response.data.token);
     });
 });
 

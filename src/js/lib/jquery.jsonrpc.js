@@ -1,8 +1,6 @@
 (function ($, undefined) {
-    function basic_auth_header(user, password) {
-      var tok = user + ':' + password;
-      var hash = btoa(tok);
-      return "Basic " + hash;
+    function token_auth_header(token) {
+      return "Token " + token;
     }
 
     $.extend({
@@ -194,11 +192,11 @@
                     cache: options.cache,
                     processData: false,
                     beforeSend: function (xhr) { 
-                        if(typeof options.username === 'undefined' || typeof options.password === 'undefined') {
+                        if(typeof options.token === 'undefined') {
                             return;
                         }
 
-                        xhr.setRequestHeader('Authorization', basic_auth_header(options.username, options.password)); 
+                        xhr.setRequestHeader('Authorization', token_auth_header(options.token)); 
                     },
                     error: function (json) {
                         that._requestError.call(that, json, options.error);
