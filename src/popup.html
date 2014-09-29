@@ -3,15 +3,26 @@
 <html>
   <head>
     <title>Hadouken for Google Chrome</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css" />
     <link href="/css/popup.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <ul id="torrents"></ul>
+    <header>
+      <h1>Torrents &mdash; <small>Hadouken</small></h1>
+    </header>
+
+    <ul id="torrents">
+    </ul>
 
     <script type="text/javascript" src="/js/popup.js"></script>
 
     <script type="text/x-html-template" id="torrent-item">
+      <li class="torrent-item">
+        <div class="title"></div>
+        <progress max="100" class="progress"></progress>
+      </li>
     </script>
   </body>
 </html>

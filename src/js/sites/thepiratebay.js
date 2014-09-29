@@ -1,26 +1,30 @@
 $(document).ready(function() {
-    var iconUrl = chrome.extension.getURL('/images/icon16.png');
+    var iconUrl = chrome.extension.getURL('/images/icon12.png');
 
-    $('a[href$=".torrent"]').each(function(item) {
+    $('a[href^="magnet:?xt=urn:btih:"]').each(function(item) {
         var el = $('<a href="#"><img src="' + iconUrl + '" /></a>');
         $(this).after(el);
         var url = $(this).attr('href');
 
         el.on('click', function(e) {
-        	sendUrl(url);
+            e.preventDefault();
+
+        	sendUrl(url, function(r) {
+                if(r) {
+                    el.remove();
+                }
+            });
         });
     });
 });
 
-function sendUrl(url) {
+function sendUrl(url, callback) {
     var message = {
-        type: 'add-url',
-        data: location.protocol + url
+        type: 'addMagnetLink',
+        data: url
     };
 
     chrome.runtime.sendMessage(message, function(response) {
-        if(response.success) {
-            console.log('whoo!');
-        }
+        callback(response.success);
     });
 }

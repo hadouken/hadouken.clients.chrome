@@ -27,8 +27,8 @@
 
                 return true;
 
-            } else if (request.type === 'add-url') {
-                addUrl(request.data, sendResponse);
+            } else if (request.type === 'addMagnetLink') {
+                addMagnetLink(request.data, sendResponse);
                 return true;
             } else if (request.type === 'get-torrents') {
                 sendResponse({ data: torrents });
@@ -46,26 +46,17 @@
         });
     }
 
-    function addUrl(url, callback) {
+    function addMagnetLink(url, callback) {
         _getFormattedOptions(function(opts) {
             if(!opts.valid) {
                 return;
             }
 
             $.jsonRPC.request('torrents.addUrl', {
-                params: [ url, '', '' ],
-                endPoint: options.url,
-                token: options.token,
-                success: function(response) {
-                    var opt = {
-                        type: 'basic',
-                        title: 'Torrent added',
-                        message: 'Successfully added torrent ' + response.result.Name,
-                        iconUrl: '/images/icon128.png'
-                    };
-
-                    chrome.notifications.create(response.result.Id, opt, function() { callback({ success: true }); });
-                },
+                params: [ url, {} ],
+                endPoint: opts.url,
+                token: opts.token,
+                success: function(response) { callback({ success: true }); },
                 error: function() { callback({ success: false }); }
             });
         });
@@ -77,12 +68,14 @@
 
             if(typeof options === 'undefined') {
                 callback({ valid: false });
+                return;
             }
 
             if(typeof options.host === 'undefined'
                 || typeof options.port === 'undefined'
                 || typeof options.token === 'undefined') {
                 callback({ valid: false });
+                return;
             }
 
             callback({
@@ -93,8 +86,28 @@
         });
     }
 
+    function sendNotification(notification) {
+        var opt = {
+            type: 'basic',
+            title: notification.title,
+            message: notification.message,
+            iconUrl: '/images/icon128.png'
+        };
+
+        if(!notification.callback) {
+            notification.callback = function() {}
+        }
+
+        chrome.notifications.create(notification.id, opt, function() { notification.callback() });
+    }
+
     function torrentAdded(torrent) {
         runtime.sendMessage({ type: 'torrent-added', data: torrent });
+        sendNotification({
+            id: torrent.InfoHash,
+            title: 'Torrent added',
+            message: torrent.Name + ' added.'
+        });
     }
 
     function torrentRemoved(infoHash) {
@@ -122,7 +135,6 @@
                         }
 
                         torrents[torrent.InfoHash] = torrent;
-                        firstTimeout = false;
                     }
 
                     if (data.result.length) {
@@ -137,6 +149,7 @@
                         }
                     }
 
+                    firstTimeout = false;
                     setTimeout(getTorrents, 1000);
                 }
             });
