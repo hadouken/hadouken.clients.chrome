@@ -1,5 +1,5 @@
 {
-  "name": "hadouken.extensions.chrome",
+  "name": "hadouken.clients.chrome",
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "^0.4.3",
